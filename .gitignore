@@ -1,0 +1,13 @@
+# Ne jamais committer de vraies données d'élèves (noms, identifiants, mots de passe)
+/data/
+*.csv
+!sample_data/*.csv
+/out/
+*.pdf
+!sample_data/*.pdf
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
