@@ -1,2 +1,7 @@
 pdfplumber>=0.11
 reportlab>=4.0
+
+# Nécessaires uniquement si vos PDF ÉduConnect sont des images scannées (OCR).
+# Requiert également le logiciel Tesseract installé sur la machine (voir README).
+pytesseract>=0.3.10
+pypdfium2>=4.0
