@@ -11,7 +11,7 @@ Produit des fiches PDF récapitulant, pour chaque élève :
   mot_de_passe_educonnect = mot_de_passe_scribe + "-974" + classe
   ```
 
-  Exemple : mot de passe Scribe `Ab3kZ9q`, classe `6A` → `Ab3kZ9q-9746A`
+  Exemple : mot de passe Scribe `Ab3kZ9q`, classe `6a` → `Ab3kZ9q-9746A` (classe en majuscules)
 
 ## Installation (Windows)
 
@@ -120,8 +120,8 @@ CLASSE;NOM;PRENOM;LOGIN;MOT DE PASSE;NUMERO ELEVE;INE
 
 `NUMERO ELEVE` et `INE` sont lus mais ne figurent pas sur les fiches.
 
-Le suffixe du mot de passe ÉduConnect reprend la valeur **exacte** de la colonne CLASSE :
-classe `6A` → `-9746A`, classe `601` → `-974601`.
+Le suffixe du mot de passe ÉduConnect reprend la valeur de la colonne CLASSE, **mise en
+majuscules** : classe `6A` → `-9746A`, classe `6a` → `-9746A`, classe `601` → `-974601`.
 
 ## Exemple de test (données fictives)
 

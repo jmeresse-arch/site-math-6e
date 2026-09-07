@@ -97,7 +97,8 @@ class Eleve:
 
     @property
     def mdp_educonnect(self) -> str:
-        return f"{self.mdp_scribe}-974{self.classe.strip()}"
+        # la classe est mise en majuscules dans le suffixe : 6a -> -9746A
+        return f"{self.mdp_scribe}-974{self.classe.strip().upper()}"
 
     @property
     def identifiant_attendu(self) -> str:
