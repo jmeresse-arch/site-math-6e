@@ -601,6 +601,21 @@ def main():
     if args.educonnect_dir:
         pdf_paths += sorted(args.educonnect_dir.glob("*.pdf"))
 
+    # sécurité : ne jamais relire les fiches produites par le programme lui-même
+    fiches_generees = [p for p in pdf_paths if p.name.lower().startswith("fiches_")]
+    if fiches_generees:
+        print(
+            "ATTENTION: ces fichiers ressemblent à des fiches déjà produites par ce "
+            "programme et sont ignorés (ce ne sont pas des courriers ÉduConnect) :"
+        )
+        for p in fiches_generees:
+            print(f"  - {p.name}")
+        print(
+            "  Le dossier des PDF ÉduConnect ne doit contenir que les courriers d'origine "
+            "(6A.pdf, 6B.pdf, ...), et le dossier de sortie doit être différent."
+        )
+        pdf_paths = [p for p in pdf_paths if p not in fiches_generees]
+
     manquants = [p for p in args.educonnect_pdf if not p.exists()]
     if manquants:
         for p in manquants:
