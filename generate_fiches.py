@@ -575,9 +575,41 @@ def main():
     )
     args = parser.parse_args()
 
+    if args.csv and not args.csv.exists():
+        print(f"ERREUR : le fichier CSV '{args.csv}' est introuvable.")
+        candidats = sorted(
+            p.name for p in Path.cwd().iterdir()
+            if p.is_file() and p.suffix.lower() in (".csv", ".txt", ".xlsx", ".xls")
+        )
+        if candidats:
+            print("Fichiers de ce type présents dans le dossier courant :")
+            for c in candidats:
+                print(f"  - {c}")
+            print(
+                "Reprenez le nom exact ci-dessus (les fichiers Excel .xlsx doivent d'abord "
+                "être enregistrés au format CSV)."
+            )
+        else:
+            print(f"Aucun fichier CSV dans le dossier courant ({Path.cwd()}).")
+        return 1
+
+    if args.educonnect_dir and not args.educonnect_dir.is_dir():
+        print(f"ERREUR : le dossier '{args.educonnect_dir}' est introuvable.")
+        return 1
+
     pdf_paths = list(args.educonnect_pdf)
     if args.educonnect_dir:
         pdf_paths += sorted(args.educonnect_dir.glob("*.pdf"))
+
+    manquants = [p for p in args.educonnect_pdf if not p.exists()]
+    if manquants:
+        for p in manquants:
+            print(f"ERREUR : le fichier PDF '{p}' est introuvable.")
+        return 1
+
+    if args.educonnect_dir and not pdf_paths:
+        print(f"ERREUR : aucun fichier .pdf dans le dossier '{args.educonnect_dir}'.")
+        return 1
 
     if args.dump_text:
         if not pdf_paths:
